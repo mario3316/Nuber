@@ -1,3 +1,20 @@
+type Chat {
+  id: Int!
+  messages: [Message]
+  participants: [User]
+  createdAt: String!
+  updatedAt: String
+}
+
+type Message {
+  id: Int!
+  text: String!
+  chat: Chat!
+  user: User!
+  createdAt: String!
+  updatedAt: String
+}
+
 type Ride {
   id: Int!
   status: String!
@@ -10,8 +27,20 @@ type Ride {
   price: Float!
   distance: String!
   duration: String!
+  driver: User!
+  passenger: User!
   createdAt: String!
   updatedAt: String
+}
+
+type FacebookConnectResponse {
+  ok: Boolean!
+  error: String
+  token: String
+}
+
+type Mutation {
+  FacebookConnect(firstName: String!, lastName: String!, email: String, fbId: String!): FacebookConnectResponse!
 }
 
 type User {
@@ -32,10 +61,27 @@ type User {
   lastLng: Float!
   lastLat: Float!
   lastOrientation: Float
+  chat: Chat
+  messages: [Message]
+  verification: [Verification]
+  ridesAsPassenger: [Ride]
+  ridesAsDriver: [Ride]
+  fbID: String
   createdAt: String
   updatedAt: String
 }
 
 type Query {
   user: User
+}
+
+type Verification {
+  id: Int!
+  target: String!
+  payload: String!
+  key: String!
+  used: Boolean!
+  user: User!
+  createdAt: String!
+  updatedAt: String!
 }

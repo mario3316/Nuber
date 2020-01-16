@@ -21,6 +21,7 @@ type User {
   verification: [Verification]
   ridesAsPassenger: [Ride]
   ridesAsDriver: [Ride]
+  fbID: String
   createdAt: String
   updatedAt: String
 }

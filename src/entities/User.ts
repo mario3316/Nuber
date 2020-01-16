@@ -24,9 +24,9 @@ const BCRYPT_ROUNDS = 10;
 class User extends BaseEntity {
   @PrimaryGeneratedColumn() id: number;
 
-  @Column({ type: "varchar", length: 200, unique: true })
+  @Column({ type: "varchar", length: 200, nullable: true })
   @IsEmail()
-  email: string;
+  email: string | null;
 
   @Column({ type: "boolean", default: false })
   verifiedEmail: boolean;
@@ -37,13 +37,13 @@ class User extends BaseEntity {
   @Column({ type: "varchar", length: 200 })
   lastName: string;
 
-  @Column({ type: "int" })
+  @Column({ type: "int", nullable: true })
   age: number;
 
-  @Column({ type: "varchar", length: 200 })
+  @Column({ type: "varchar", length: 200, nullable: true })
   password: string;
 
-  @Column({ type: "varchar", length: 200 })
+  @Column({ type: "varchar", length: 200, nullable: true })
   phoneNumber: string;
 
   @Column({ type: "boolean", default: false })
@@ -51,6 +51,10 @@ class User extends BaseEntity {
 
   @Column({ type: "varchar", length: 200 })
   profilePhoto: string;
+
+  @Column({ type: "text", nullable: true })
+  fbId: string;
+  // 페이스북 ID
 
   @ManyToOne(
     type => Chat,
